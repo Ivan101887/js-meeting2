@@ -4,7 +4,7 @@ const elemTown = document.querySelector('#Town');
 const elemCity = document.querySelector('#City');
 let processedData = []
 setInit();
-// setEvent();
+setEvent();
 async function setInit() {
   await getData();
   render();
@@ -42,15 +42,15 @@ function setCity(allCity = [], cityOpt = []) {
   return str;
 }
 
-function setTown(city, allTwon = [], townOpt = []) {
+function setTown(city, allTown = [], townOpt = []) {
   let str = '<option class="form__option" value="" selected disabled>請選擇鄉鎮區...</option>'
   data.forEach((item) => {
-    if (item === city) {
-      allTownArr.push(item.Town);
+    if (item.City === city) {
+      allTown.push(item.Town);
     }
   })
-  allTwon.forEach((item) => {
-    if (item.Town.indexOf(item)) {
+  allTown.forEach((item, index) => {
+    if (allTown.indexOf(item) === index) {
       townOpt.push(item);
     }
   })
@@ -60,6 +60,26 @@ function setTown(city, allTwon = [], townOpt = []) {
   return str;
 }
 
+function filter(e) {
+  const self = e.target;
+  let arr = [];
+  if (self.id === 'City') {
+    elemTown.innerHTML = setTown(self.value);
+    data.forEach((item) => {
+      if (item.City === self.value) {
+        arr.push(item);
+      }
+    })
+    elemCardBox.innerHTML =  makeStr(arr);
+    return;
+  }
+  data.forEach((item) => {
+    if (item.Town === self.value) {
+      arr.push(item);
+    }
+  })
+  elemCardBox.innerHTML = makeStr(arr);
+}
 
 function makeStr(arr, str = '') {
   arr.forEach((item) => {
@@ -84,6 +104,6 @@ function makeStr(arr, str = '') {
 }
 
 function setEvent() {
-  elemCity.addEventListener('change', filter);
-  elemTown.addEventListener('change', filter);
+  elemTown.addEventListener('change', filter, false);
+  elemCity.addEventListener('change', filter, false);
 }
