@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="keywords" content="特色料理, 美食, 小吃, 農村, 特色農產, 農產, 料理">
+    <meta name="description" content="湖苺宴開在大湖酒莊的4樓，是大湖地區農會經營的田媽媽餐坊">
+    <title>農村地方美食小吃特色料理</title>
+    <link rel="stylesheet" href="styles/index.min.css">
+    <script src="./js/main.js" defer></script>
+  </head>
+
+  <body>
+    <header class="header">
+      <h1 class="header__tit text-center">農村地方美食小吃特色料理</h1>
+    </header>
+    <main class="main container mx-auto">
+      <div class="form border-round">
+        <select class="form__sel border-round" name="cityFilter" id="City">
+          <option class="form__option" value="" selected disabled>請選擇行政區域...</option>
+        </select>
+        <select class="form__sel border-round" name="townFilter" id="Town">
+          <option class="form__option" value="" selected disabled>請選擇鄉鎮區...</option>
+        </select>
+      </div>
+      <div class="cardBox" id="CardBox"></div>
+    </main>
+
+
+  </body>
+
+</html>
