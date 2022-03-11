@@ -14,7 +14,7 @@ async function setInit() {
 
 function render() {
   elemCardBox.innerHTML = makeStr(data);
-  elemCity.innerHTML = setCity();
+  elemCity.innerHTML = '<option class="form__option" value="" selected disabled>請選擇行政區域...</option>' + setOption(0);
 }
 
 async function getData() {
@@ -28,35 +28,22 @@ async function getData() {
   }
 }
 
-function setCity(allCity = [], cityOpt = []) {
-  let str = '<option class="form__option" value="" selected disabled>請選擇行政區域...</option>'
+function setOption(type, city, allArr = [], optArr = [], str='') {
   data.forEach((item) => {
-    allCity.push(item.City);
-  })
-  allCity.forEach((item, index) => {
-    if (allCity.indexOf(item) === index) {
-      cityOpt.push(item);
+    if (type === 0) {
+      allArr.push(item.City);
+      return;
     }
-  })
-  cityOpt.forEach((item) => {
-    str += `<option value=${item} class="form__option">${item}</option>`;
-  })
-  return str;
-}
-
-function setTown(city, allTown = [], townOpt = []) {
-  let str = '<option class="form__option" value="" selected disabled>請選擇鄉鎮區...</option>'
-  data.forEach((item) => {
     if (item.City === city) {
-      allTown.push(item.Town);
+      allArr.push(item.Town);
     }
   })
-  allTown.forEach((item, index) => {
-    if (allTown.indexOf(item) === index) {
-      townOpt.push(item);
+  allArr.forEach((item, index) => {
+    if (allArr.indexOf(item) === index) {
+      optArr.push(item);
     }
   })
-  townOpt.forEach((item) => {
+  optArr.forEach((item) => {
     str += `<option value=${item} class="form__option">${item}</option>`;
   })
   return str;
@@ -66,13 +53,13 @@ function filter(e) {
   const self = e.target;
   let arr = [];
   if (self.id === 'City') {
-    elemTown.innerHTML = setTown(self.value);
+    elemTown.innerHTML += setOption(1,self.value);
     data.forEach((item) => {
       if (item.City === self.value) {
         arr.push(item);
       }
     })
-    elemCardBox.innerHTML =  makeStr(arr);
+    elemCardBox.innerHTML = makeStr(arr);
     return;
   }
   data.forEach((item) => {
@@ -94,7 +81,7 @@ function makeStr(arr, str = '') {
             </figure>
             <p class="card__tag">${item.City}</p>
             <div class="card__content">
-              <p class="card__town">${item.Town}</p>
+              <em class="card__town">${item.Town}</em>
               <h2 class="card__name">${item.Name}</h2>
               <p class="card__desc">${item.HostWords}</p>
             </div>
@@ -106,6 +93,6 @@ function makeStr(arr, str = '') {
 }
 
 function setEvent() {
-  elemTown.addEventListener('change', filter, false);
-  elemCity.addEventListener('change', filter, false);
+  elemTown.addEventListener('change', filter);
+  elemCity.addEventListener('change', filter);
 }

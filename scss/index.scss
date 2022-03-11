@@ -8,8 +8,19 @@
   }
 }
 
-@mixin phone {
-  @media screen and (max-width: 576px) {
+@mixin phone-lg {
+  @media screen and (max-width: 414px) {
+    @content;
+  } 
+}
+
+@mixin phone-md {
+  @media screen and (max-width: 375px) {
+    @content;
+  } 
+}
+@mixin phone-sm {
+  @media screen and (max-width: 325px) {
     @content;
   } 
 }
@@ -30,12 +41,39 @@ html {
     top: 32px;
     bottom: 35px;
   }
+  @include phone-md {
+    padding: {
+      top: 28px;
+      bottom: 30px;
+    }
+  }
+  @include phone-sm {
+    padding: {
+      top: 24px;
+      bottom: 26px;
+    }
+  }
   &__tit {
     font: {
       size: 2rem;
       weight: 600;
     }
     color: #666;
+    @include phone-lg {
+      font: {
+        size: 30px;
+      }
+    }
+    @include phone-md {
+      font: {
+        size: 28px;
+      }
+    }
+    @include phone-sm {
+      font: {
+        size: 24px;
+      }
+    }
   }
 }
 
@@ -57,7 +95,13 @@ html {
     left: 15px;
     right: 15px;
   }
-  @include phone {
+  @include phone-md {
+    margin: {
+      left: 10px;
+      right: 10px;
+    }
+  }
+  @include phone-lg {
     padding: {
       top: 0;
       bottom: 0;
@@ -88,7 +132,7 @@ html {
       left: 15px;
       right: 15px;
     }
-    @include phone {
+    @include phone-lg {
       width: 100%;
       margin: {
         left: 0;
@@ -117,7 +161,7 @@ html {
   margin: {
     top: 10px;
   }
-  @include phone {
+  @include phone-lg {
     margin: {
       top: 0;
     }
@@ -128,45 +172,52 @@ html {
   @include pad {
     width: (100% / 2);
   }
-  @include phone {
+  @include phone-md {
+    padding: 10px 10px 0 10px;
+  }
+  @include phone-lg {
     width: 100%;
+    padding: {
+      bottom: 0;
+    }
   }
   padding: 15px;
+  box-sizing: border-box;
   &__wrap {
     position: relative;
     overflow: hidden;
     box-sizing: border-box;
     &:hover {
       .card {
-        &__img {
+        &__imgWrap {
           transform:scale(1.05);
         }
         &__content {
-          bottom: 10px;
+          bottom: 12px;
         }
       }
     }
   }
   &__imgWrap {
-    overflow: hidden;
     height: 200px;
     &::after {
-      position: absolute;
       content: '';
+      position: absolute;
+      top: 0;
       display: block;
       width: 100%;
       height: 100%;
       background: {
-        color: rgba(0, 0, 0, .2);
+        image: linear-gradient(to bottom, rgba(0,0,0,0) 0%,rgba(0,0,0,.3) 70%,rgba(0,0,0,.8) 100%);
       }
     }
+    transition: all .5s ease-in;
   }
-  box-sizing: border-box;
   &__img {
     display: block;
     width: 100%;
-    height: auto;
-    transition: all .5s ease-in;
+    height: 100%;
+    object-fit: cover;
   }
   &__tag {
     position: absolute;
@@ -187,22 +238,24 @@ html {
     max-width: 100%;
     
     padding: {
-      left: 15px;
+      left: 12px;
     }
-    
     transition: all .5s ease-in;
   }
   &__town {
     opacity: .6;
+    display: block;
     margin: {
       bottom: 5px;
     }
     font: {
       size: 15px;
-      style: italic;
     }
   }
   &__name {
+    font: {
+      weight: 400;
+    }
     &::after {
       content: "";
       display: block;
@@ -229,8 +282,8 @@ html {
 .footer {
   font: {
     size: 12px;
-    color: #666;
   }
+  color: #666;
   padding: {
     top: 15px;
     bottom: 15px;
@@ -264,7 +317,6 @@ html {
 /* --- Utility --- */
 .container {
   max-width: 1200px;
-  
 }
 
 .text {
