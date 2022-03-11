@@ -33,9 +33,7 @@ function setOption(type, city, allArr = [], str = '') {
     allArr = data.map((item) => item.City)
   } else {
     data.forEach((item) => {
-      if (item.City === city) {
-        allArr.push(item.Town);
-      }
+      if (item.City === city) { allArr.push(item.Town); }
     })
   }
   let optArr = allArr.filter((item, index, self) => self.indexOf(item) === index)
@@ -51,9 +49,8 @@ function filter(e, arr = []) {
   if (self.id === 'City') {
     elemTown.innerHTML += setOption(1, val);
     arr = data.filter((item) => item.City === val);
-  } else {
-    arr = data.filter((item) => item.Town === val);
   }
+  else { arr = data.filter((item) => item.Town === val); }
   elemCardBox.innerHTML = makeStr(arr);
 }
 
