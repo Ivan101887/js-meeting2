@@ -2,11 +2,13 @@ let data = [];
 const elemCardBox = document.querySelector('#CardBox');
 const elemTown = document.querySelector('#Town');
 const elemCity = document.querySelector('#City');
+const elemLoading = document.querySelector('#Loading');
 let processedData = []
 setInit();
 setEvent();
 async function setInit() {
   await getData();
+  elemLoading.classList.add('js-loader')
   render();
 }
 
