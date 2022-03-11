@@ -8,7 +8,7 @@ setInit();
 setEvent();
 async function setInit() {
   await getData();
-  elemLoading.classList.add('js-loader')
+  elemLoading.classList.add('js-loader');
   render();
 }
 
@@ -88,7 +88,7 @@ function makeStr(arr, str = '') {
     str += `
 			<div class="card">
         <div class="card__wrap">
-          ${item.Url === '' ? '' : `<a href=${item.Url} class="card__link">`}
+          ${item.Url === '' ? '' : `<a href=${item.Url} class="card__link" target="_blank">`}
             <figure class="card__imgWrap">
             <img src=${item.PicURL} alt=${item.Name} class="card__img">
             </figure>

@@ -131,19 +131,19 @@ html {
   @include phone {
     width: 100%;
   }
+  padding: 15px;
   &__wrap {
     position: relative;
     overflow: hidden;
-    padding: 15px;
     box-sizing: border-box;
-  }
-  &:hover {
-    .card {
-      &__img {
-        transform:scale(1.05);
-      }
-      &__content {
-        bottom: 20px;
+    &:hover {
+      .card {
+        &__img {
+          transform:scale(1.05);
+        }
+        &__content {
+          bottom: 10px;
+        }
       }
     }
   }
@@ -152,18 +152,16 @@ html {
     height: 200px;
     &::after {
       position: absolute;
-      top: 15px;
-      left: 15px;
       content: '';
       display: block;
-      width: calc(100% - 30px);
-      height: calc(100% - 30px);
+      width: 100%;
+      height: 100%;
       background: {
         color: rgba(0, 0, 0, .2);
       }
     }
-    box-sizing: border-box;
   }
+  box-sizing: border-box;
   &__img {
     display: block;
     width: 100%;
@@ -172,8 +170,7 @@ html {
   }
   &__tag {
     position: absolute;
-    top: 15px;
-    left: 15px;
+    top: 0;
     font: {
       size: 12px
     }
@@ -185,14 +182,12 @@ html {
   }
   &__content {
     position: absolute;
-    bottom: -37px;
-    left: 10px;
+    bottom: -54px;
     color: #fff;
     max-width: 100%;
     
     padding: {
       left: 15px;
-      right: 15px;
     }
     
     transition: all .5s ease-in;
@@ -259,6 +254,9 @@ html {
     color: rgba(0, 0, 0, 0.7);
   }
   &__img {
+    margin: {
+      top: 50%;
+    }
     display: block;
   }
 }
