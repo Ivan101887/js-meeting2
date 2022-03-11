@@ -28,45 +28,34 @@ async function getData() {
   }
 }
 
-function setOption(type, city, allArr = [], optArr = [], str='') {
-  data.forEach((item) => {
-    if (type === 0) {
-      allArr.push(item.City);
-      return;
-    }
-    if (item.City === city) {
-      allArr.push(item.Town);
-    }
-  })
-  allArr.forEach((item, index) => {
-    if (allArr.indexOf(item) === index) {
-      optArr.push(item);
-    }
-  })
+
+
+function setOption(type, city, allArr = [], str = '') {
+  if (type === 0) {
+    allArr = data.map((item) => item.City)
+  } else {
+    data.forEach((item) => {
+      if (item.City === city) {
+        allArr.push(item.Town);
+      }
+    })
+  }
+  let optArr = allArr.filter((item, index, self) => self.indexOf(item) === index)
   optArr.forEach((item) => {
     str += `<option value=${item} class="form__option">${item}</option>`;
   })
   return str;
 }
 
-function filter(e) {
+function filter(e, arr = []) {
   const self = e.target;
-  let arr = [];
+  const val = self.value;
   if (self.id === 'City') {
-    elemTown.innerHTML += setOption(1,self.value);
-    data.forEach((item) => {
-      if (item.City === self.value) {
-        arr.push(item);
-      }
-    })
-    elemCardBox.innerHTML = makeStr(arr);
-    return;
+    elemTown.innerHTML += setOption(1, val);
+    arr = data.filter((item) => item.City === val);
+  } else {
+    arr = data.filter((item) => item.Town === val);
   }
-  data.forEach((item) => {
-    if (item.Town === self.value) {
-      arr.push(item);
-    }
-  })
   elemCardBox.innerHTML = makeStr(arr);
 }
 
@@ -77,7 +66,7 @@ function makeStr(arr, str = '') {
         <div class="card__wrap">
           ${item.Url === '' ? '' : `<a href=${item.Url} class="card__link" target="_blank">`}
             <figure class="card__imgWrap">
-            <img src=${item.PicURL} alt=${item.Name} class="card__img">
+            <img src=${item.PicURL} alt=${item.Name} class="card__img" loading="lazy">
             </figure>
             <p class="card__tag">${item.City}</p>
             <div class="card__content">
