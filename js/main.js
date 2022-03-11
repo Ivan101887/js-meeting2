@@ -28,8 +28,6 @@ async function getData() {
   }
 }
 
-
-
 function setOption(type, city, allArr = [], str = '') {
   if (type === 0) {
     allArr = data.map((item) => item.City)
